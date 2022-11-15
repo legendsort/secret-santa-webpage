@@ -6,6 +6,9 @@ import { getRules } from '../../state/rule/reducer'
 import { getPersons } from '../../state/person/reducer';
 import { RootState, AppDispatch } from '../../state/store'
 
+const getRandom = (arr: Array<String>) => {
+    return arr[Math.floor(Math.random() * arr.length)];
+} 
 
 const DownloadPage = () => {
     const rules = useSelector(({ rule }: RootState) => getRules(rule.rules))
@@ -33,10 +36,7 @@ const DownloadPage = () => {
                 return !relation.includes(person.name)
             })
             let result = name + ", you are giving a present to "
-            canGive.map(({ name }, id) => {
-                if (id) result += ","
-                result += name
-            })
+            const names = canGive.map(({ name }) => name)
             result += '.'
             const blob = new Blob([result], { type: "text/plain;charset=utf-8" });
             zip.file(`${name}.txt`, blob);
