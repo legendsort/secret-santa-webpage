@@ -37,8 +37,8 @@ const DownloadPage = () => {
             })
             let result = name + ", you are giving a present to "
             const names = canGive.map(({ name }) => name)
-            result += '.'
             if(names.length > 0) result += names[0]
+            result += '.'
             const blob = new Blob([result], { type: "text/plain;charset=utf-8" });
             zip.file(`${name}.txt`, blob);
         }
